@@ -5,6 +5,13 @@ name: Release
 
 on:
   workflow_call:
+    inputs:
+      github_repository:
+        description: 'The ${{ github.repository }}`
+        required: true
+      github_workspace:
+        description: 'The ${{ github.workspace }}`
+        required: true
     secrets:
       github_token:
         description: 'The GITHUB_TOKEN.'
@@ -21,9 +28,9 @@ jobs:
       - name: Create the release
         uses: xmidt-org/release-builder-action@v2
         with:
-          gh-repository: ${{ github.repository }}
-          gh-workspace: ${{ github.workspace }}
-          gh-token: ${{ GITHUB_TOKEN }}
+          gh-repository: ${{ inputs.github_repository }}
+          gh-workspace: ${{ inputs.github_workspace }}
+          gh-token: ${{ secrets.github_token }}
 
       - name: Upload the Release
         id: create_release
