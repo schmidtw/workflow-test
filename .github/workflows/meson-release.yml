@@ -7,10 +7,13 @@ on:
   workflow_call:
     inputs:
       github_repository:
-        description: 'The ${{ github.repository }}`
+        description: 'The ${{ github.repository }}'
         required: true
       github_workspace:
-        description: 'The ${{ github.workspace }}`
+        description: 'The ${{ github.workspace }}'
+        required: true
+      provides:
+        description: 'The library name that is provided.'
         required: true
     secrets:
       github_token:
@@ -31,6 +34,8 @@ jobs:
           gh-repository: ${{ inputs.github_repository }}
           gh-workspace: ${{ inputs.github_workspace }}
           gh-token: ${{ secrets.github_token }}
+          meson-project: true
+          meson-provides: ${{ inputs.provides }}
 
       - name: Upload the Release
         id: create_release
