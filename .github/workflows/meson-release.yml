@@ -7,11 +7,11 @@ on:
   workflow_call:
     inputs:
       github_repository:
-        description: 'The ${{ github.repository }}'
+        description: 'The github.repository'
         type: string
         required: true
       github_workspace:
-        description: 'The ${{ github.workspace }}'
+        description: 'The github.workspace'
         type: string
         required: true
       provides:
