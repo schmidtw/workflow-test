@@ -8,16 +8,20 @@ on:
     inputs:
       github_repository:
         description: 'The ${{ github.repository }}'
+        type: string
         required: true
       github_workspace:
         description: 'The ${{ github.workspace }}'
+        type: string
         required: true
       provides:
         description: 'The library name that is provided.'
+        type: string
         required: true
     secrets:
       github_token:
         description: 'The GITHUB_TOKEN.'
+        type: string
         required: true
 
 jobs:
