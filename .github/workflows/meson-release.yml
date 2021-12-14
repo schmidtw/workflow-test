@@ -18,30 +18,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Determine repo name
-        run: |
-          echo "repo_name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
-          echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-          echo "release_slug=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')-${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
-        shell: bash
+      - name: Create the release
+        uses: xmidt-org/release-builder-action@v2
+        with:
+          gh-repository: ${{ github.repository }}
+          gh-workspace: ${{ github.workspace }}
+          gh-token: ${{ GITHUB_TOKEN }}
 
-      - name: Create tarball and sha256
-        run: |
-          tree
-          cd ..
-          tree
-          .github/scripts/make_release_artifacts.sh -v ${version} -r '${{ github.repository }}' -m
-
-      - name: Prepare Release Body
-        id: prep
-        run: |
-          export version=${GITHUB_REF#refs/tags/}
-          export NOTES=$(cat CHANGELOG.md | perl -0777 -ne 'print "$1\n" if /.*## \[${version}\]\s(.*?)\s+## \[(v\d+.\d+.\d+)\].*/s')
-          export TODAY=`date +'%m/%d/%Y'`
-          echo ::set-output name=rname::$(echo ${version} ${TODAY})
-          echo ::set-output name=body::${NOTES}
-
-      - name: Create Release
+      - name: Upload the Release
         id: create_release
         uses: ncipollo/release-action@v1
         with:
