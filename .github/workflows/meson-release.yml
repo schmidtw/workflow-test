@@ -13,7 +13,6 @@ on:
     secrets:
       github_token:
         description: 'The GITHUB_TOKEN.'
-        required: true
 
 jobs:
   release:
