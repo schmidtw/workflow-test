@@ -21,7 +21,6 @@ on:
     secrets:
       github_token:
         description: 'The GITHUB_TOKEN.'
-        type: string
         required: true
 
 jobs:
