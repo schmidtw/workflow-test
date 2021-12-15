@@ -9,7 +9,7 @@ on:
       meson-provides:
         description: 'The package being provided.'
         type: string
-        required: true
+        default: ''
     secrets:
       token:
         description: 'The GITHUB_TOKEN.'
@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Create Release Bundle
+      - name: Generate Release Bundle
         id: bundle
         uses: xmidt-org/release-builder-action@v2
         with:
