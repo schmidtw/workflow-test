@@ -9,7 +9,7 @@ on:
       meson-provides:
         description: 'The package being provided.'
         type: string
-        default: ''
+        default: '_'
     secrets:
       token:
         description: 'The GITHUB_TOKEN.'
