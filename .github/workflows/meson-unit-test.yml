@@ -46,9 +46,8 @@ jobs:
           meson setup --warnlevel 3 --werror build
 
       - name: Get Sonarcloud Binaries
+        uses: xmidt-org/sonarcloud-installer@v1
         working-directory: build
-        run: |
-          ../.github/scripts/get_sonarcloud.sh
 
       - name: Build
         working-directory: build
