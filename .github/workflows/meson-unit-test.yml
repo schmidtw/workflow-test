@@ -47,7 +47,8 @@ jobs:
 
       - name: Get Sonarcloud Binaries
         uses: xmidt-org/sonarcloud-installer@v1
-        working-directory: build
+        with:
+          working-directory: build
 
       - name: Build
         working-directory: build
