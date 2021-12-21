@@ -13,10 +13,6 @@ on:
         description: 'The GITHUB_REPOSITORY variable.'
         type: string
         required: true
-      library:
-        description: 'The library to build examine.'
-        type: string
-        required: true
       email:
         description: 'The email of the coverity manager.'
         type: string
@@ -85,7 +81,7 @@ jobs:
       - name: Coverity Analysis
         working-directory: build
         run: |
-          ./coverity/bin/cov-build --dir cov-int ninja ${{ inputs.library }}
+          ./coverity/bin/cov-build --dir cov-int ninja coverity
 
       - name: Archive Results
         working-directory: build
