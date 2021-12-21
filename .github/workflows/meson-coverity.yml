@@ -58,7 +58,7 @@ jobs:
           mkdir build
 
       - name: Get Coverity Binaries
-        uses: xmidt-org/coverity-installer-action@v1
+        uses: xmidt-org/coverity-installer-action@v2
         with:
           working-directory: build
           token: ${{ secrets.coverity_key }}
