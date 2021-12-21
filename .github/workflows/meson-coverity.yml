@@ -9,7 +9,7 @@ on:
       packages:
         description: 'The optional list of ubuntu packages to install prior to building.'
         type: string
-      github_repository:
+      repo:
         description: 'The GITHUB_REPOSITORY variable.'
         type: string
         required: true
@@ -21,7 +21,7 @@ on:
         description: 'The email of the coverity manager.'
         type: string
         default: 'weston_schmidt@alumni.purdue.edu'
-      github_sha:
+      sha:
         description: 'The GITHUB_SHA variable.'
         type: string
         required: true
@@ -29,7 +29,7 @@ on:
       coverity_key:
         description: 'The Coverity key.'
         required: true
-      github_token:
+      token:
         description: 'The GITHUB_TOKEN.'
         required: true
 
@@ -66,7 +66,7 @@ jobs:
         with:
           working-directory: build
           token: ${{ secrets.coverity_key }}
-          slug: ${{ inputs.github_repository }}
+          slug: ${{ inputs.repo }}
 
       - name: Meson Build
         run: |
@@ -100,6 +100,6 @@ jobs:
           curl --form token=$COVERITY_SECRET \
                --form email=${{ inputs.email }} \
                --form file=@coverity.tgz \
-               --form version="${{ inputs.github_sha }}" \
+               --form version="${{ inputs.sha }}" \
                --form description="`date`" \
-               "https://scan.coverity.com/builds?project=${{ inputs.github_repository }}//\//\%2F}"
+               "https://scan.coverity.com/builds?project=${{ inputs.repo }}//\//\%2F}"
