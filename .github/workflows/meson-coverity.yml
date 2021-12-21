@@ -61,12 +61,12 @@ jobs:
         run: |
           mkdir build
 
-      - name: Get Sonarcloud Binaries
+      - name: Get Coverity Binaries
         uses: xmidt-org/coverity-installer-action@v1
         with:
           working-directory: build
           token: ${{ secrets.coverity_key }}
-          slug: ${{ inputs.repo }}
+          repo: ${{ inputs.repo }}
 
       - name: Meson Build
         run: |
